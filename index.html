@@ -28,9 +28,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-					<!-- Re-enable when portfolio is added
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Portfolio</a></li>
-						-->
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Projects</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#resume">Resume</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a></li>
                     </ul>
@@ -65,28 +63,28 @@
             </div>
         </header>
         <!-- Portfolio Section-->
-		<!-- Remove until it actually gets updated
         <section class="page-section portfolio" id="portfolio">
             <div class="container">
-                <!-- Portfolio Section Heading--#
-                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Portfolio</h2>
-                <!-- Icon Divider--#
+                <!-- Portfolio Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Projects</h2>
+                <!-- Icon Divider-->
                 <div class="divider-custom">
                     <div class="divider-custom-line"></div>
                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                     <div class="divider-custom-line"></div>
                 </div>
-                <!-- Portfolio Grid Items--#
+                <!-- Portfolio Grid Items-->
                 <div class="row justify-content-center">
-                    <!-- Portfolio Item 1--#
+                    <!-- Portfolio Item 1-->
                     <div class="col-md-6 col-lg-4 mb-5">
                         <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal1">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/cabin.png" alt="" />
+                            <img class="img-fluid" src="assets/img/portfolio/PhiRack.jpg" alt="" />
                         </div>
                     </div>
+					<!-- Remove until it actually gets updated
                     <!-- Portfolio Item 2--#
                     <div class="col-md-6 col-lg-4 mb-5">
                         <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal2">
@@ -132,10 +130,10 @@
                             <img class="img-fluid" src="assets/img/portfolio/submarine.png" alt="" />
                         </div>
                     </div>
+					-->
                 </div>
             </div>
         </section>
-		-->
         <!-- About Section-->
         <section class="page-section bg-primary text-white mb-0" id="resume">
             <div class="container">
@@ -261,7 +259,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal1Label">Log Cabin</h2>
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal1Label">Budget Supercomputer</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
@@ -269,9 +267,12 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Portfolio Modal - Image-->
-                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/cabin.png" alt="" />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/PhiRack.jpg" alt="" />
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                    <p class="mb-5">The monstrosity you are looking at is a supercomputer, more or less. With the exception of some donated manual labor (for which I am eternally grateful), I built it entirely on my own back in 2018 as a side project. At the time, Intel had recently discontinued the Xeon Phi Knights Landing product line, which left computer manufacturers with an unfortunate stockpile of useless hardware. As it turned out, I knew just the right people to get my hands on some (OK, a lot) of that hardware for cheap, and the rest is history.</p>
+									<p class="mb-5">When this was built, it technically could have ranked on the TOP 500 list. Spanning four shipping containers just like this one, the entire system contained well over 300 Phi 7210 nodes, each  clocking a maximum 2662 double precision GigaFLOPS for a grand total of nearly 1 PetaFLOPS.</p>
+									<p class="mb-5">Of course, I didn't have money for fancy supercomputer interconnect, let alone to install RAM in 300+ systems (it was so expensive back then!)... but there was some good news. These CPUs were originally designed for HPC workloads, and came with 16 GB of high-bandwidth memory on the CPU package itself. To avoid any need to add hard drives, I decided I would netboot them with a lightweight container linux distro. I settled on RancherOS and used Docker Swarm for orchestration, alongside a bunch of custom bash/python tools to control IPMI and for various administrative tasks, with Prometheus/Grafana for monitoring. The bottleneck was the local servers the Docker registry and for TFTP (for RancherOS netboot). To avoid choking the network I would avoid switching workloads on everything at once, but who likes waiting? I ended up migrating to QSFP+ network cards on the infrastructure servers and central switch, with SFP+ out to the switches serving the nodes. It was a reasonable compromise for my budget.</p>
+									<p class="mb-5">This setup made it possible to switch workloads remarkably quickly, which was valuable for economic reasons, since the most profitable workload could change very quickly. I will let you guess what the workload was. Gotta pay the bills...</p>
                                     <button class="btn btn-primary" data-dismiss="modal">
                                         <i class="fas fa-times fa-fw"></i>
                                         Close Window
