@@ -10142,10 +10142,22 @@ h3 {
   cursor: pointer;
   position: relative;
   display: block;
-  max-width: 25rem;
+  max-width: 40rem;
   border-radius: 0.5rem;
   overflow: hidden;
 }
+
+.portfolio .portfolio-item .portfolio-item-overlay {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  opacity: 1;
+}
+
+.portfolio .portfolio-item .portfolio-item-overlay .portfolio-item-overlay-content {
+  font-size: 1.5rem;
+}
+
 .portfolio .portfolio-item .portfolio-item-caption {
   position: absolute;
   top: 0;
