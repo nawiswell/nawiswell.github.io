@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Nick Wiswell — Software Developer, lapsed Materials Engineer, and builder of budget supercomputers." />
+    <meta name="description" content="Nick Wiswell — semiconductor engineer, computer enjoyer, art doer, hobby haver." />
     <title>Nick Wiswell</title>
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -250,6 +250,63 @@
             line-height: 1.65;
         }
 
+        /* ── Patents Section ────────────────────────────────────── */
+        .patent-tally {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            padding: 0.25rem 0.65rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .patent-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .patent-item {
+            padding: 1.75rem 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .patent-item:last-child { border-bottom: 1px solid var(--line); }
+
+        .patent-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: -0.01em;
+            margin-bottom: 0.45rem;
+        }
+
+        .patent-desc {
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 0.6rem;
+        }
+
+        .patent-number {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            color: var(--dim);
+            letter-spacing: 0.04em;
+        }
+
+        /* ── Resume Section ──────────────────────────────────────── */
+        .resume-desc {
+            color: var(--muted);
+            font-size: 1.02rem;
+            max-width: 480px;
+            margin-bottom: 2rem;
+        }
+
         /* ── Contact Section ─────────────────────────────────────── */
         .contact-intro {
             color: var(--muted);
@@ -313,6 +370,8 @@
         <ul class="nav-links">
             <li><a href="#project">Project</a></li>
             <li><a href="#about">About</a></li>
+            <li><a href="#patents">Patents</a></li>
+            <li><a href="#resume">Resume</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
@@ -320,11 +379,11 @@
     <!-- Hero -->
     <section class="section" id="top">
         <div id="hero">
-            <p class="eyebrow">Software Developer &nbsp;·&nbsp; SF Bay Area</p>
+            <p class="eyebrow">Semiconductor engineer: CMP process control &nbsp;·&nbsp; San Francisco</p>
             <h1>Nick<br>Wiswell</h1>
             <p class="hero-desc">
-                Lapsed materials engineer turned software developer.
-                Scientific computing was my gateway drug.
+                Background in materials science and CS.
+                Sometimes I get bored and do crazy things.
             </p>
             <a class="hero-scroll" href="#project">
                 <span>See the project</span>
@@ -347,8 +406,7 @@
                 Intel had just abruptly discontinued the
                 <a href="https://en.wikipedia.org/wiki/Xeon_Phi#Knights_Landing" target="_blank" rel="noopener">Xeon Phi Knights Landing</a>
                 product line, which left computer manufacturers with an unfortunate stockpile of hardware they
-                could not sell through the usual channels. I knew just the right people to get my hands on some
-                — OK, a lot — of that hardware for cheap.
+                could not sell through the usual channels. I knew just the right people to get my hands on a lot of that hardware for cheap.
             </p>
 
             <div class="project-img-wrap">
@@ -360,7 +418,7 @@
                 The thermal load was staggering, but water-cooling gave me flexibility. Each of the four shipping
                 containers — fireproof, with suppression — had a cold intake aisle and a hot exhaust aisle,
                 with air pulled through radiators mounted on the central rack. When fully assembled, the system
-                included well over 300 Xeon Phi 7210 nodes. Each node weighs in at a maximum 2,662 double-precision
+                included over 300 Xeon Phi 7210 nodes. Each node weighs in at a maximum 2,662 double-precision
                 GigaFLOPS, for a grand total of nearly <strong>1 PetaFLOP</strong> — enough to have ranked on the
                 TOP500 list at the time it was built.
             </p>
@@ -371,21 +429,16 @@
             </div>
 
             <p>
-                Of course, there was no budget for fancy supercomputer interconnect, let alone RAM for 300+ systems
-                (it was expensive back then). The saving grace: these CPUs were designed for HPC workloads and
-                shipped with 16 GB of high-bandwidth memory on the package itself, and could boot without any
-                additional RAM installed. To avoid hard drives entirely, I netbooted them with a minimal container
-                Linux distribution.
+                Of course, I had no budget for fancy interconnect, let alone RAM for 300+ systems. 
+                The saving grace: these CPUs shipped with 16 GB of high-bandwidth memory on the package itself 
+                (the very same type that is now in shortage for AI), and could boot without any additional RAM installed. 
+                To avoid hard drives entirely, I netbooted them with a minimal container Linux distribution.
             </p>
 
             <p>
-                I settled on RancherOS and used Docker Swarm for orchestration, alongside custom bash/Python tooling
-                for administration and IPMI control, with Prometheus and Grafana for monitoring. The bottleneck
-                turned out to be the infrastructure servers running the Docker registry and TFTP for netboot.
-                To avoid choking the network during workload switches, I migrated the spine to QSFP+ with SFP+
-                out to the node switches — a reasonable compromise for the budget. This made it possible to
-                roll workloads across the cluster remarkably quickly, which mattered a great deal because
-                the most profitable workload could change overnight. I will let you guess what that workload was.
+                I settled on RancherOS and used Docker Swarm for orchestration, alongside custom bash/python tooling
+                for scheduling, administration, and IPMI control, with Prometheus and Grafana for monitoring. Networking used a mix of
+                SFP+ and QSFP+ optics.
             </p>
 
             <div class="project-img-wrap">
@@ -402,11 +455,12 @@
         <div class="about-grid">
             <div class="about-card">
                 <h3>Education</h3>
-                <p>MS, Materials Engineering<br>Cal Poly San Luis Obispo, 2014</p>
+                <p>MS, Computer Science<br>Georgia Tech</p>
+                <p>MS, Materials Engineering<br>Cal Poly San Luis Obispo</p>
             </div>
             <div class="about-card">
                 <h3>Focus</h3>
-                <p>Software development with a background in scientific computing, systems programming, and infrastructure.</p>
+                <p>Over a decade of experience with CMP and semiconductor process integration, with particular focus on real-time control, numerical optimization, and physics-based modeling</p>
             </div>
             <div class="about-card">
                 <h3>Location</h3>
@@ -414,9 +468,36 @@
             </div>
             <div class="about-card">
                 <h3>Interests</h3>
-                <p>HPC, distributed systems, and occasionally building things that probably shouldn't exist on a budget.</p>
+                <p>HPC, distributed systems, and occasionally building things that probably shouldn't exist.</p>
             </div>
         </div>
+    </section>
+
+    <!-- Patents -->
+    <section class="section" id="patents">
+        <p class="label">Intellectual Property</p>
+        <h2>Selected Patents</h2>
+        <p class="patent-tally">14 total granted patents</p>
+        <div class="patent-list">
+            <div class="patent-item">
+                <p class="patent-title">Machine Vision as Input to Process Control</p>
+                <p class="patent-desc">Invented a novel control loop using real-time computer vision analysis.</p>
+                <p class="patent-number">US Patent #20200094370</p>
+            </div>
+            <div class="patent-item">
+                <p class="patent-title">Synthetic Training Data Generation</p>
+                <p class="patent-desc">Developed a method for generating synthetic spectral data to train ML models in data-scarce environments.</p>
+                <p class="patent-number">US Patent #20200005139</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume -->
+    <section class="section" id="resume">
+        <p class="label">Resume</p>
+        <h2>Download</h2>
+        <p class="resume-desc">Senior Algorithm Engineer — real-time control, numerical optimization, and physics-based modeling.</p>
+        <a class="contact-link" href="assets/resume/Nicholas_Wiswell_Resume_2026.pdf" download>Download Resume (PDF)</a>
     </section>
 
     <!-- Contact -->
